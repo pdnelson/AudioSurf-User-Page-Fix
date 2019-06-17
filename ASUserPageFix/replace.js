@@ -5,8 +5,6 @@
 //
 // Anything requiring JavaScript no longer functions at this time
 //     - Includes shouts, tab switching (Thrones, Songs, Artists, Characters), and viewing friends
-//
-// Parts of the header are off-center
 
 // If it is a user page, redirects to the /ext/* directory
 if (!window.location.href.includes("/ext/") && window.location.href.includes("mypage")) {
