@@ -7,7 +7,7 @@
  
   "content_scripts": [{
     "js": ["replace.js"],
-    "matches": ["http://audio-surf.com/*"]
+    "matches": ["http://www.audio-surf.com/*", "http://www.audiosurfthegame.com/*", "http://audio-surf.com/*", "http://audiosurfthegame.com/*"]
   }]
  
 }
