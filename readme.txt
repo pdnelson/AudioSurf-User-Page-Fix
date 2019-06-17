@@ -1,0 +1,11 @@
+// AudioSurf User Page Chrome Extension
+// Since Chrome is based on Chromium, maybe it'll work in MS Edge, too
+
+// BetaMaster64 (2019)
+
+// Installation is pretty simple. Here's how to do that!
+// Open Chrome, type chrome://extensions in the search/URL bar at the top
+// In the top right corner, make sure "Developer mode" is switched on
+// Drag and drop the FOLDER (not the individual .js and .json files) into your Chrome Extensions window
+// Make sure the extensions is selected
+// ...and that's it! You should be able to browse AudioSurf profiles (almost) as if they were never gone...
