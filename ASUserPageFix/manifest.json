@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+ 
+  "name": "AudioSurf User Page Fix",
+  "version": "0.1.0",
+  "description": "Fixes AudioSurf user pages",
+ 
+  "content_scripts": [{
+    "js": ["replace.js"],
+    "matches": ["http://audio-surf.com/*"]
+  }]
+ 
+}
