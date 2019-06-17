@@ -9,3 +9,7 @@
 // Drag and drop the FOLDER (not the individual .js and .json files) into your Chrome Extensions window
 // Make sure the extensions is selected
 // ...and that's it! You should be able to browse AudioSurf profiles (almost) as if they were never gone...
+
+//For Firefox, type about:debugging as the URL
+//Click Load Temporary Add-on in the top right
+//Navigate to the extension folder and select either the json or js file

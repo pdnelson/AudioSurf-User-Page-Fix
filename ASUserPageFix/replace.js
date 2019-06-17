@@ -5,8 +5,6 @@
 //
 // Anything requiring JavaScript no longer functions at this time
 //     - Includes shouts, tab switching (Thrones, Songs, Artists, Characters), and viewing friends
-//
-// Parts of the header are off-center
 
 // If it is a user page, redirects to the /ext/* directory
 if (!window.location.href.includes("/ext/") && window.location.href.includes("mypage")) {
@@ -42,9 +40,9 @@ if (window.location.href.includes("/ext/mypage")) {
 	  scripts[i].src = 'http://audio-surf.com' + scripts[i].src.substring(25, scripts[i].src.length);
 	}
 	
-	// Adds (broken) header and footer
-	document.getElementsByTagName('body')[0].innerHTML = '<center><div id="header" style="width:850px;"><a href="http://audio-surf.com/index.php" style="text-align:center;"><img src="http://audio-surf.com/images/logo_main.png" alt="Audiosurf"></a><div id="personal_bar"><img src="http://audio-surf.com/images/personal_bar_left.png" alt=""><span id="personal_bar_text">[ Welcome back! <a href="#">My Page</a> <a href="http://audio-surf.com/friends.php">Friends</a> <a href="http://audio-surf.com/account.php">Account</a> <a href="http://audio-surf.com/logout.php">Log Out</a> ]</span><span id="personal_bar_spacer"></span></div><ul id="nav_bar"><li><a href="http://store.steampowered.com/app/12910/"><img src="http://audio-surf.com/images/demo_tab.png" alt="Buy"></a></li><li><a href="http://store.steampowered.com/app/12900"><img src="http://audio-surf.com/images/buy_tab.png" alt="Demo"></a></li><li><a href="http://audio-surf.com/"><img src="http://audio-surf.com/images/home_tab.png" alt="Home"></a></li><li><a href="http://audio-surf.com/song.php?t=popular"><img src="http://audio-surf.com/images/songs_tab.png" alt="Songs"></a></li><li><a href="http://audio-surf.com/forum"><img src="http://audio-surf.com/images/forums_tab.png" alt="Forum"></a></li><li><a href="http://audio-surf.com/news.php"><img src="http://audio-surf.com/images/news_tab.png" alt="News"></a></li></ul></div></center>' +
-	document.getElementsByTagName('body')[0].innerHTML +
+	// Adds header and footer
+	document.getElementById('main_container').innerHTML = '<center><div id="header" style="width:850px;"><a href="http://audio-surf.com/index.php" style="text-align:center;"><img src="http://audio-surf.com/images/logo_main.png" alt="Audiosurf"></a><div id="personal_bar"><img src="http://audio-surf.com/images/personal_bar_left.png" alt=""><span id="personal_bar_text">[ Welcome back! <a href="#">My Page</a> <a href="http://audio-surf.com/friends.php">Friends</a> <a href="http://audio-surf.com/account.php">Account</a> <a href="http://audio-surf.com/logout.php">Log Out</a> ]</span><span id="personal_bar_spacer"></span></div><ul id="nav_bar"><li><a href="http://store.steampowered.com/app/12910/"><img src="http://audio-surf.com/images/demo_tab.png" alt="Buy"></a></li><li><a href="http://store.steampowered.com/app/12900"><img src="http://audio-surf.com/images/buy_tab.png" alt="Demo"></a></li><li><a href="http://audio-surf.com/"><img src="http://audio-surf.com/images/home_tab.png" alt="Home"></a></li><li><a href="http://audio-surf.com/song.php?t=popular"><img src="http://audio-surf.com/images/songs_tab.png" alt="Songs"></a></li><li><a href="http://audio-surf.com/forum"><img src="http://audio-surf.com/images/forums_tab.png" alt="Forum"></a></li><li><a href="http://audio-surf.com/news.php"><img src="http://audio-surf.com/images/news_tab.png" alt="News"></a></li></ul></div></center>' +
+	document.getElementById('main_container').innerHTML +
 	'<center><div id="footer" style="width:812px"><span id="copyright">© 2010 Audiosurf, LLC | website design by <a href="http://www.funkisockmunki.com/">tabitha</a> </span><span id="footer_nav"><a href="mailto:dylan@audio-surf.com">Contact Us</a></span></div></center>';
 }
 
