@@ -1,7 +1,13 @@
-// AudioSurf User Page Chrome Extension
+// AudioSurf User Page Fix
 // Since MS Edge is based on Chromium, maybe it'll work in that, too
-
 // BetaMaster64, Yuvira (2019)
+
+// TO DO:
+// Add certain database elements (shouts, viewing friends) that are not present
+// These will need pulled from another page, most likely,
+// so we will have to have to find a page where that information is displayed
+// ***This may not be possible, so the script might be as close to complete as it's gonna get
+
 
 // Installation is pretty simple. Here's how to do that:
 
