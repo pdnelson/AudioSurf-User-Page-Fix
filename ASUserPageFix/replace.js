@@ -2,9 +2,8 @@
 // BetaMaster64, Yuvira (2019)
 //
 // TO DO:
-// Add certain database elements (shouts, viewing friends) that are not present
-// These will need pulled from another page, most likely,
-// so we will have to have to find a page where that information is displayed
+// Add shouts
+// Better friend navigation (some way to retrieve max friend pages)
 
 // URL offset variable
 var URL;
@@ -12,7 +11,7 @@ var URL;
 // userid (for friends list)
 var userid;
 
-// friend page number
+// Friend page number
 var page = 1;
 
 // Figures out what URL you are using, and adjusts the offset variables accordingly
