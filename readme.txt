@@ -3,9 +3,8 @@
 // BetaMaster64, Yuvira (2019)
 
 // TO DO:
-// Add certain database elements (shouts, viewing friends) that are not present
-// These will need pulled from another page, most likely,
-// so we will have to have to find a page where that information is displayed
+// Add shouts
+// Better friend navigation (some way to retrieve max friend pages)
 // ***This may not be possible, so the script might be as close to complete as it's gonna get
 
 
