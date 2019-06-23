@@ -1,14 +1,26 @@
 // AudioSurf user page fix
-// BetaMaster64 (2019)
+// BetaMaster64, Yuvira (2019)
 //
-// Known bugs:
-//
-// Anything requiring JavaScript no longer functions at this time
-//     - Includes shouts, tab switching (Thrones, Songs, Artists, Characters), and viewing friends
+// TO DO:
+// Add certain database elements (shouts, viewing friends) that are not present
+// These will need pulled from another page, most likely,
+// so we will have to have to find a page where that information is displayed
+
+// URL offset variable
+var URL;
+
+// Figures out what URL you are using, and adjusts the offset variables accordingly
+if(window.location.href.includes("www.audio-surf")) URL = window.location.href.substring(0,25);
+else if(window.location.href.includes("www.audiosurfthegame.com")) URL = window.location.href.substring(0,31);
+else if(window.location.href.includes("audio-surf")) URL = window.location.href.substring(0,21);
+else if(window.location.href.includes("audiosurfthegame")) URL = window.location.href.substring(0,27);
+
+// If the URL is not recognized, logs error
+else console.log("Didn't detect the URL: '" + window.location.href + "'! E-mail BetaMaster with this error message!");
 
 // If it is a user page, redirects to the /ext/* directory
 if (!window.location.href.includes("/ext/") && window.location.href.includes("mypage")) {
-	window.location.replace(window.location.href.substring(0,21) + "/ext/" + window.location.href.substring(22,window.location.href.length));
+	window.location.replace(URL + "/ext/" + window.location.href.substring((URL.length + 1),window.location.href.length));
 }
 
 // Modifies the user page
@@ -17,33 +29,39 @@ if (window.location.href.includes("/ext/mypage")) {
 	// Replaces all 'link' tags
 	var links = document.getElementsByTagName('link');
 	for (var i = 0, l = links.length; i < l; i++) {
-	  links[i].href = 'http://audio-surf.com' + links[i].href.substring(25, links[i].href.length);
+	  links[i].href = URL + links[i].href.substring((URL.length + 4), links[i].href.length);
 	}
 
 	// Replaces all 'img' tags
 	var imgs = document.getElementsByTagName('img');
 	for (var i = 0, l = imgs.length; i < l; i++) {
-	  imgs[i].src = 'http://audio-surf.com' + imgs[i].src.substring(25, imgs[i].src.length);
+	  imgs[i].src = URL + imgs[i].src.substring((URL.length + 4), imgs[i].src.length);
 	}
 	
-	// Replaces all 'a' tags
+	// Replaces all 'a' tags as long as they link to some variation of 'mypage'
 	var as = document.getElementsByTagName('a');
 	for (var i = 0, l = as.length; i < l; i++) {
-		if (!as[i].href.includes("mypage")) {
-			as[i].href = "http://audio-surf.com/" + as[i].href.substring(26,as[i].href.length);
-		}
+		if (!as[i].href.includes("mypage")) as[i].href = URL + as[i].href.substring((URL.length + 4),as[i].href.length);
 	}
-	
-	// Replaces all 'script' tags...but they don't actually work :'(
-	var scripts = document.getElementsByTagName('script');
-	for (var i = 0, l = scripts.length; i < l; i++) {
-	  scripts[i].src = 'http://audio-surf.com' + scripts[i].src.substring(25, scripts[i].src.length);
-	}
+
+	// Injects JavaScript manually
+	var myPageScript = document.createElement('script');
+	var jQueryScript = document.createElement('script');
+	var jParralaxScript = document.createElement('script');
+
+	myPageScript.innerHTML = 'var page=1;function next_friends(a){var b=getRequestObject(),c="ext/friend_refresh.php?u="+userid+"&p=";switch(a){case "next":if(page<totalPages)page+=1;else page=1;break;case "prev":if(page>1)page-=1;else page=totalPages;break;default:page=a;break}a=c+page;b.onreadystatechange=function(){if(b.readyState==4){var e=document.getElementById("friends");e.innerHTML=b.responseText}};try{b.open("GET",a,true);b.send(null)}catch(d){page=1;a=c+page}}function show_tab(a){for(var b=0;b<document.getElementById("favorites_nav").childNodes.length;b++){var c=document.getElementById("favorites_nav").childNodes[b];if(c.id==a)switch(a){case "favorites_thrones_tab":c.firstChild.src="http://audio-surf.com/images/mypage/thrones_tab_left.png";document.getElementById("thrones_held_panel").style.display="inline";break;case "favorites_songs_tab":c.firstChild.src="http://audio-surf.com/images/mypage/songs_tab.png";document.getElementById("most_played_songs_panel").style.display="inline";break;case "favorites_ppm_tab":c.firstChild.src="http://audio-surf.com/images/mypage/ppm_tab.png";break;case "favorites_artists_tab":c.firstChild.src="http://audio-surf.com/images/mypage/artists_tab.png";document.getElementById("favorite_artists_panel").style.display="inline";break;case "favorites_characters_tab":c.firstChild.src="http://audio-surf.com/images/mypage/characters_tab.png";document.getElementById("favorite_characters_panel").style.display="inline";break}else switch(c.id){case "favorites_thrones_tab":c.firstChild.src="http://audio-surf.com/images/mypage/thrones_tab_left_des.png";document.getElementById("thrones_held_panel").style.display="none";break;case "favorites_songs_tab":c.firstChild.src="http://audio-surf.com/images/mypage/songs_tab_des.png";document.getElementById("most_played_songs_panel").style.display="none";break;case "favorites_ppm_tab":c.firstChild.src="http://audio-surf.com/images/mypage/ppm_tab_des.png";break;case "favorites_artists_tab":c.firstChild.src="http://audio-surf.com/images/mypage/artists_tab_des.png";document.getElementById("favorite_artists_panel").style.display="none";break;case "favorites_characters_tab":c.firstChild.src="http://audio-surf.com/images/mypage/characters_tab_des.png";document.getElementById("favorite_characters_panel").style.display="none";break}}}function doRequest(a){var b=getRequestObject();a="ext/friend_friendlyFunctions.php?a="+a;b.onreadystatechange=function(){if(b.readyState==4){var d=document.getElementById("personal_add");d.innerHTML=""}};try{b.open("GET",a,true);b.send(null)}catch(c){}}function fsbClick(){var a=document.getElementById("fsb");if(a.value=="Search players")a.value=""}function fssClick(){var a=document.getElementById("fss");if(a.value=="Search songs or artists")a.value=""}function removeShout(a){var b=getRequestObject();a="ext/mypage_shouts_refresh.php?a=r&id="+a;b.onreadystatechange=function(){if(b.readyState==4)document.getElementById("shouts_content").innerHTML=b.responseText};try{b.open("GET",a,true);b.send(null)}catch(c){}}function getRequestObject(){var a;try{a=new XMLHttpRequest}catch(b){try{a=new ActiveXObject("Msxml2.XMLHTTP")}catch(c){try{a=new ActiveXObject("Microsoft.XMLHTTP")}catch(d){return}}}return a}function shoutClick(){var a=document.getElementById("sBox");if(a.text=="Leave a shout"||a.innerHTML=="Leave a shout")a.innerHTML=""};';
+	jQueryScript.src = 'http://audio-surf.com/scripts/jquery-1.3.2.min.js';
+	jParralaxScript.src = 'http://audio-surf.com/scripts/jquery.jparallax.js';
+
+	document.head.appendChild(myPageScript);
+	document.head.appendChild(jQueryScript);
+	document.head.appendChild(jParralaxScript);
 	
 	// Adds header and footer
-	document.getElementById('main_container').innerHTML = '<center><div id="header" style="width:850px;"><a href="http://audio-surf.com/index.php" style="text-align:center;"><img src="http://audio-surf.com/images/logo_main.png" alt="Audiosurf"></a><div id="personal_bar"><img src="http://audio-surf.com/images/personal_bar_left.png" alt=""><span id="personal_bar_text">[ Welcome back! <a href="#">My Page</a> <a href="http://audio-surf.com/friends.php">Friends</a> <a href="http://audio-surf.com/account.php">Account</a> <a href="http://audio-surf.com/logout.php">Log Out</a> ]</span><span id="personal_bar_spacer"></span></div><ul id="nav_bar"><li><a href="http://store.steampowered.com/app/12910/"><img src="http://audio-surf.com/images/demo_tab.png" alt="Buy"></a></li><li><a href="http://store.steampowered.com/app/12900"><img src="http://audio-surf.com/images/buy_tab.png" alt="Demo"></a></li><li><a href="http://audio-surf.com/"><img src="http://audio-surf.com/images/home_tab.png" alt="Home"></a></li><li><a href="http://audio-surf.com/song.php?t=popular"><img src="http://audio-surf.com/images/songs_tab.png" alt="Songs"></a></li><li><a href="http://audio-surf.com/forum"><img src="http://audio-surf.com/images/forums_tab.png" alt="Forum"></a></li><li><a href="http://audio-surf.com/news.php"><img src="http://audio-surf.com/images/news_tab.png" alt="News"></a></li></ul></div></center>' +
+	document.getElementById('main_container').innerHTML = '<center><div id="header" style="width:850px;"><a href="http://audio-surf.com/index.php"><img src="http://audio-surf.com/images/logo_main.png" alt="Audiosurf"></a><div id="personal_bar"><img src="http://audio-surf.com/images/personal_bar_left.png" alt=""><span id="personal_bar_text">[ Welcome back! <a href="#">My Page</a> <a href="http://audio-surf.com/friends.php">Friends</a> <a href="http://audio-surf.com/account.php">Account</a> <a href="http://audio-surf.com/logout.php">Log Out</a> ]</span><span id="personal_bar_spacer"></span></div><ul id="nav_bar"><li><a href="http://store.steampowered.com/app/12910/"><img src="http://audio-surf.com/images/demo_tab.png" alt="Buy"></a></li><li><a href="http://store.steampowered.com/app/12900"><img src="http://audio-surf.com/images/buy_tab.png" alt="Demo"></a></li><li><a href="http://audio-surf.com/"><img src="http://audio-surf.com/images/home_tab.png" alt="Home"></a></li><li><a href="http://audio-surf.com/song.php?t=popular"><img src="http://audio-surf.com/images/songs_tab.png" alt="Songs"></a></li><li><a href="http://audio-surf.com/forum"><img src="http://audio-surf.com/images/forums_tab.png" alt="Forum"></a></li><li><a href="http://audio-surf.com/news.php"><img src="http://audio-surf.com/images/news_tab.png" alt="News"></a></li></ul></div></center>' +
 	document.getElementById('main_container').innerHTML +
 	'<center><div id="footer" style="width:812px"><span id="copyright">© 2010 Audiosurf, LLC | website design by <a href="http://www.funkisockmunki.com/">tabitha</a> </span><span id="footer_nav"><a href="mailto:dylan@audio-surf.com">Contact Us</a></span></div></center>';
+	
 }
 
 // Modifies non-user pages so that user page links work
@@ -53,8 +71,7 @@ else {
 	for (var i = 0, l = as.length; i < l; i++) {
 		
 		// Only changes 'a' tags relating to user pages
-		if (as[i].href.includes("mypage")) {
-			as[i].href = "http://audio-surf.com/ext/" + as[i].href.substring(22,as[i].href.length);
-		}
+		if (as[i].href.includes("mypage")) as[i].href = URL + "/ext/" + as[i].href.substring((URL.length + 1),as[i].href.length);
 	}
 }
+
