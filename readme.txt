@@ -4,8 +4,8 @@
 
 // TO DO:
 // Add shouts
-// Better friend navigation (some way to retrieve max friend pages)
-// ***This may not be possible, so the script might be as close to complete as it's gonna get
+// Fix friend page number bug
+// Make the header logged in user not static
 
 
 // Installation is pretty simple. Here's how to do that:
