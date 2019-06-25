@@ -3,8 +3,8 @@
 // BetaMaster64, Yuvira (2019)
 
 // TO DO:
+// Put myscript.js in its own file
 // Add shouts
-// Fix friend page number bug
 // Make the header logged in user not static
 
 
