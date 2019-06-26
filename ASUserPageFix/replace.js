@@ -27,6 +27,8 @@ if (!window.location.href.includes("/ext/") && window.location.href.includes("my
 // Modify user page
 if (window.location.href.includes("/ext/mypage")) {
 	
+
+	
 	// Replace all 'link' tags
 	var links = document.getElementsByTagName('link');
 	for (var i = 0, l = links.length; i < l; i++) {
@@ -52,22 +54,28 @@ if (window.location.href.includes("/ext/mypage")) {
 	nav.innerHTML = '<span><a href="javascript:next_friends(\'prev\')"><img src="http://audio-surf.com/images/mypage/arrow_l.png" alt="Previous"></a> <span id="pagenum">'+page+'</span> <a href="javascript:next_friends(\'next\')"><img src="http://audio-surf.com/images/mypage/arrow.png" alt="Next"></a></span>';
 	document.getElementById('friends_container').appendChild(nav);
 
-	// Inject JavaScript
+	// Create JavaScript elements
 	var myPageScript = document.createElement('script');
 	var jQueryScript = document.createElement('script');
 	var jParralaxScript = document.createElement('script');
+	
+	// Load 'myPage' JavaScript file
+	var myPage;
+	loadMyPage();
 
-	myPageScript.innerHTML = 'function next_friends(a) {b=getRequestObject(), c = "http://audio-surf.com/ext/friend_refresh.php?u='+userid+'&p=";switch(a) {case "next": page += 1;break;case "prev": if(page>1) page -= 1; else page = 1;break;default:page=a;break;}a=c+page;b.onreadystatechange = function() {if(b.readyState == 4) {var f = b.responseText.replace(/ext/g, "http://audio-surf.com/ext");var e = document.getElementById("friends");if (f != "" && f != " " && f != null) {e.innerHTML = f;}else {page--;}document.getElementById("pagenum").innerHTML=page;}};try {b.open("GET", a, true);b.send(null);}catch(d) {page = 1;a = c + page;}}function show_tab(a){for(var b=0;b<document.getElementById("favorites_nav").childNodes.length;b++){var c=document.getElementById("favorites_nav").childNodes[b];if(c.id==a)switch(a){case "favorites_thrones_tab":c.firstChild.src="http://audio-surf.com/images/mypage/thrones_tab_left.png";document.getElementById("thrones_held_panel").style.display="inline";break;case "favorites_songs_tab":c.firstChild.src="http://audio-surf.com/images/mypage/songs_tab.png";document.getElementById("most_played_songs_panel").style.display="inline";break;case "favorites_ppm_tab":c.firstChild.src="http://audio-surf.com/images/mypage/ppm_tab.png";break;case "favorites_artists_tab":c.firstChild.src="http://audio-surf.com/images/mypage/artists_tab.png";document.getElementById("favorite_artists_panel").style.display="inline";break;case "favorites_characters_tab":c.firstChild.src="http://audio-surf.com/images/mypage/characters_tab.png";document.getElementById("favorite_characters_panel").style.display="inline";break}else switch(c.id){case "favorites_thrones_tab":c.firstChild.src="http://audio-surf.com/images/mypage/thrones_tab_left_des.png";document.getElementById("thrones_held_panel").style.display="none";break;case "favorites_songs_tab":c.firstChild.src="http://audio-surf.com/images/mypage/songs_tab_des.png";document.getElementById("most_played_songs_panel").style.display="none";break;case "favorites_ppm_tab":c.firstChild.src="http://audio-surf.com/images/mypage/ppm_tab_des.png";break;case "favorites_artists_tab":c.firstChild.src="http://audio-surf.com/images/mypage/artists_tab_des.png";document.getElementById("favorite_artists_panel").style.display="none";break;case "favorites_characters_tab":c.firstChild.src="http://audio-surf.com/images/mypage/characters_tab_des.png";document.getElementById("favorite_characters_panel").style.display="none";break}}}function doRequest(a){var b=getRequestObject();a="http://audio-surf.com/ext/friend_friendlyFunctions.php?a="+a;b.onreadystatechange=function(){if(b.readyState==4){var d=document.getElementById("personal_add");d.innerHTML=""}};try{b.open("GET",a,true);b.send(null)}catch(c){}}function fsbClick(){var a=document.getElementById("fsb");if(a.value=="Search players")a.value=""}function fssClick(){var a=document.getElementById("fss");if(a.value=="Search songs or artists")a.value=""}function removeShout(a){var b=getRequestObject();a="http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id="+a;b.onreadystatechange=function(){if(b.readyState==4)document.getElementById("shouts_content").innerHTML=b.responseText};try{b.open("GET",a,true);b.send(null)}catch(c){}}function getRequestObject(){var a;try{a=new XMLHttpRequest}catch(b){try{a=new ActiveXObject("Msxml2.XMLHTTP")}catch(c){try{a=new ActiveXObject("Microsoft.XMLHTTP")}catch(d){return}}}return a}function shoutClick(){var a=document.getElementById("sBox");if(a.text=="Leave a shout"||a.innerHTML=="Leave a shout")a.innerHTML=""};';
+	// Set JavaScript elements
+	myPageScript.innerHTML = myPage;
 	jQueryScript.src = 'http://audio-surf.com/scripts/jquery-1.3.2.min.js';
 	jParralaxScript.src = 'http://audio-surf.com/scripts/jquery.jparallax.js';
 
+	// Append JavaScript elements to HTML
 	document.head.appendChild(myPageScript);
 	document.head.appendChild(jQueryScript);
 	document.head.appendChild(jParralaxScript);
 	
- 	// Refresh friends
+ 	// Refresh friends and shouts
 	var getf = document.createElement('script');
-	getf.innerHTML = 'next_friends(1)';
+	getf.innerHTML = 'next_friends(1);loadShouts();';
 	document.head.appendChild(getf);
 	
 	// Add header and footer
@@ -86,4 +94,187 @@ else {
 		// Change 'a' tags relating to user pages
 		if (as[i].href.includes("mypage")) as[i].href = URL + "/ext/" + as[i].href.substring((URL.length + 1),as[i].href.length);
 	}
+}
+
+function loadMyPage() {
+	myPage = '' + 
+
+'function next_friends(a) {                                                                                                                    ' +
+'	                                                                                                                                           ' +
+'	b=getRequestObject(), c = "http://audio-surf.com/ext/friend_refresh.php?u='+userid+'&p=";                                                  ' +
+'	                                                                                                                                           ' +
+'	switch(a) {                                                                                                                                ' +
+'		case "next": page += 1;                                                                                                                ' +
+'		break;                                                                                                                                 ' +
+'	                                                                                                                                           ' +
+'		case "prev": if(page>1) page -= 1; else page = 1;                                                                                      ' +
+'		break;                                                                                                                                 ' +
+'		                                                                                                                                       ' +
+'		default:page=a;                                                                                                                        ' +
+'		break;                                                                                                                                 ' +
+'	}                                                                                                                                          ' +
+'	                                                                                                                                           ' +
+'	a=c+page;                                                                                                                                  ' +
+'	b.onreadystatechange = function() {                                                                                                        ' +
+'		                                                                                                                                       ' +
+'		if(b.readyState == 4) {                                                                                                                ' +
+'			var f = b.responseText.replace(/ext/g, "http://audio-surf.com/ext");                                                               ' +
+'			var e = document.getElementById("friends");                                                                                        ' +
+'			                                                                                                                                   ' +
+'			if (f != "" && f != " " && f != null) e.innerHTML = f;                                                                             ' +
+'			else page--;                                                                                                                       ' +
+'			                                                                                                                                   ' +
+'			document.getElementById("pagenum").innerHTML=page;                                                                                 ' +
+'		}                                                                                                                                      ' +
+'	};                                                                                                                                         ' +
+'	                                                                                                                                           ' +
+'	try {                                                                                                                                      ' +
+'		b.open("GET", a, true);                                                                                                                ' +
+'		b.send(null);                                                                                                                          ' +
+'	}                                                                                                                                          ' +
+'	catch(d) {                                                                                                                                 ' +
+'		page = 1;                                                                                                                              ' +
+'		a = c + page;                                                                                                                          ' +
+'	}                                                                                                                                          ' +
+'}                                                                                                                                             ' +
+'                                                                                                                                              ' +
+'function show_tab(a) {                                                                                                                        ' +
+'	for(var b=0;b<document.getElementById("favorites_nav").childNodes.length;b++) {                                                            ' +
+'		var c=document.getElementById("favorites_nav").childNodes[b];                                                                          ' +
+'		if (c.id==a)                                                                                                                           ' +
+'			switch (a) {                                                                                                                       ' +
+'				case "favorites_thrones_tab":c.firstChild.src="http://audio-surf.com/images/mypage/thrones_tab_left.png";                      ' +
+'				document.getElementById("thrones_held_panel").style.display="inline";                                                          ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_songs_tab":c.firstChild.src="http://audio-surf.com/images/mypage/songs_tab.png";                               ' +
+'				document.getElementById("most_played_songs_panel").style.display="inline";                                                     ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_ppm_tab":c.firstChild.src="http://audio-surf.com/images/mypage/ppm_tab.png";                                   ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_artists_tab":c.firstChild.src="http://audio-surf.com/images/mypage/artists_tab.png";                           ' +
+'				document.getElementById("favorite_artists_panel").style.display="inline";                                                      ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_characters_tab":c.firstChild.src="http://audio-surf.com/images/mypage/characters_tab.png";                     ' +
+'				document.getElementById("favorite_characters_panel").style.display="inline";                                                   ' +
+'				break;                                                                                                                         ' +
+'			}                                                                                                                                  ' +
+'		else                                                                                                                                   ' +
+'			switch (c.id) {                                                                                                                    ' +
+'				case "favorites_thrones_tab":c.firstChild.src="http://audio-surf.com/images/mypage/thrones_tab_left_des.png";                  ' +
+'				document.getElementById("thrones_held_panel").style.display="none";                                                            ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_songs_tab":c.firstChild.src="http://audio-surf.com/images/mypage/songs_tab_des.png";                           ' +
+'				document.getElementById("most_played_songs_panel").style.display="none";                                                       ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_ppm_tab":c.firstChild.src="http://audio-surf.com/images/mypage/ppm_tab_des.png";                               ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_artists_tab":c.firstChild.src="http://audio-surf.com/images/mypage/artists_tab_des.png";                       ' +
+'				document.getElementById("favorite_artists_panel").style.display="none";                                                        ' +
+'				break;                                                                                                                         ' +
+'				                                                                                                                               ' +
+'				case "favorites_characters_tab":c.firstChild.src="http://audio-surf.com/images/mypage/characters_tab_des.png";                 ' +
+'				document.getElementById("favorite_characters_panel").style.display="none";                                                     ' +
+'				break;                                                                                                                         ' +
+'			}                                                                                                                                  ' +
+'	}                                                                                                                                          ' +
+'}                                                                                                                                             ' +
+'                                                                                                                                              ' +
+'function doRequest(a) {                                                                                                                       ' +
+'	var b=getRequestObject();                                                                                                                  ' +
+'	                                                                                                                                           ' +
+'	a="http://audio-surf.com/ext/friend_friendlyFunctions.php?a="+a;                                                                           ' +
+'	b.onreadystatechange = function() {                                                                                                        ' +
+'		if (b.readyState==4) {                                                                                                                 ' +
+'			var d=document.getElementById("personal_add");                                                                                     ' +
+'			d.innerHTML="";                                                                                                                    ' +
+'		}                                                                                                                                      ' +
+'	};                                                                                                                                         ' +
+'	                                                                                                                                           ' +
+'	try {                                                                                                                                      ' +
+'		b.open("GET",a,true);                                                                                                                  ' +
+'		b.send(null);                                                                                                                          ' +
+'	}                                                                                                                                          ' +
+'	catch(c) {}                                                                                                                                ' +
+'}                                                                                                                                             ' +
+'                                                                                                                                              ' +
+'function fsbClick() {                                                                                                                         ' +
+'	var a=document.getElementById("fsb");                                                                                                      ' +
+'	if(a.value=="Search players")a.value=""                                                                                                    ' +
+'}                                                                                                                                             ' +
+'                                                                                                                                              ' +
+'function fssClick(){                                                                                                                          ' +
+'	var a=document.getElementById("fss");                                                                                                      ' +
+'	if(a.value=="Search songs or artists")a.value=""                                                                                           ' +
+'}                                                                                                                                             ' +
+'                                                                                                                                              ' +
+'function removeShout(a) {                                                                                                                     ' +
+'	var b=getRequestObject();                                                                                                                  ' +
+'	a="http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id="+a;                                                                         ' +
+'	b.onreadystatechange=function() {                                                                                                          ' +
+'		if(b.readyState==4)document.getElementById("shouts_content").innerHTML=b.responseText                                                  ' +
+'	};                                                                                                                                         ' +
+'	                                                                                                                                           ' +
+'	try{                                                                                                                                       ' +
+'		b.open("GET",a,true);                                                                                                                  ' +
+'		b.send(null)                                                                                                                           ' +
+'	}                                                                                                                                          ' +
+'	catch(c){}                                                                                                                                 ' +
+'}                                                                                                                                             ' +
+
+'                                                                                                                                              ' +
+'function shoutClick() {                                                                                                                       ' +
+'	var a=document.getElementById("sBox");                                                                                                     ' +
+'	if(a.text=="Leave a shout"||a.innerHTML=="Leave a shout")a.innerHTML=""                                                                    ' +
+'};                                                                                                                                            ' +
+
+'function loadShouts() {                                                                                                                       ' +
+'	w=getRequestObject();                                                                                                                      ' +
+'   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id=" +                                                                        ' +
+'       document.getElementsByTagName("img")[0].src.substring(43,document.getElementsByTagName("img")[0].src.length);                          ' +
+'	                                                                                                                                           ' +
+'	w.onreadystatechange = function() {                                                                                                        ' +
+'		                                                                                                                                       ' +
+'		if(w.readyState == 4) {                                                                                                                ' +
+'			var g = w.responseText.replace(/ext/g, "http://audio-surf.com/ext");                                                               ' +
+'			var h = document.getElementById("shouts_content");                                                                                 ' +
+'			                                                                                                                                   ' +
+'			h.innerHTML = g;                                                                                                                   ' +
+'		}                                                                                                                                      ' +
+'	};                                                                                                                                         ' +
+'	                                                                                                                                           ' +
+'	try {                                                                                                                                      ' +
+'		w.open("GET", a, true);                                                                                                                ' +
+'		w.send(null);                                                                                                                          ' +
+'	}                                                                                                                                          ' +
+'	catch(d) {}                                                                                                                                ' +
+'}                                                                                                                                             ' +
+
+'function getRequestObject() {                                                                                                                 ' +
+'	var a;                                                                                                                                     ' +
+'	try {                                                                                                                                      ' +
+'		a=new XMLHttpRequest                                                                                                                   ' +
+'	}                                                                                                                                          ' +
+'	catch(b){                                                                                                                                  ' +
+'		try{                                                                                                                                   ' +
+'			a=new ActiveXObject("Msxml2.XMLHTTP")                                                                                              ' +
+'		}                                                                                                                                      ' +
+'		catch(c){                                                                                                                              ' +
+'			try{                                                                                                                               ' +
+'				a=new ActiveXObject("Microsoft.XMLHTTP")                                                                                       ' +
+'			}                                                                                                                                  ' +
+'			catch(d){                                                                                                                          ' +
+'				return                                                                                                                         ' +
+'			}                                                                                                                                  ' +
+'		}                                                                                                                                      ' +
+'	}                                                                                                                                          ' +
+'	                                                                                                                                           ' +
+'	return a                                                                                                                                   ' +
+'}                                                                                                                                             ';
 }
