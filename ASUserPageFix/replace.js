@@ -234,30 +234,30 @@ function loadMyPage() {
 '	if(a.text=="Leave a shout"||a.innerHTML=="Leave a shout")a.innerHTML=""                                                                    ' +
 '};                                                                                                                                            ' +
 
-// START LOAD SHOUTS FUNCTION		
-'function loadShouts() {                                                                                                                       ' +
-'	w=getRequestObject();                                                                                                                      ' +
-'   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id=" +                                                                        ' +
-'       document.getElementsByTagName("img")[0].src.substring(43,document.getElementsByTagName("img")[0].src.length);                          ' +
-'	                                                                                                                                           ' +
-'	w.onreadystatechange = function() {                                                                                                        ' +
-'		                                                                                                                                       ' +
-'		if(w.readyState == 4) {                                                                                                                ' +
-'			var g = w.responseText.replace(/ext/g, "http://audio-surf.com/ext");                                                               ' +
-'			var h = document.getElementById("shouts_content");                                                                                 ' +
-'			                                                                                                                                   ' +
-'			h.innerHTML = g;                                                                                                                   ' +
-'		}                                                                                                                                      ' +
-'	};                                                                                                                                         ' +
-'	                                                                                                                                           ' +
-'	try {                                                                                                                                      ' +
-'		w.open("GET", a, true);                                                                                                                ' +
-'		w.send(null);                                                                                                                          ' +
-'	}                                                                                                                                          ' +
-'	catch(d) {}                                                                                                                                ' +
-'}                                                                                                                                             ' +
+// START LOAD SHOUTS FUNCTION
+	'function loadShouts() {                                                                                                                       ' +
+	'	w=getRequestObject();                                                                                                                      ' +
+	'   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?&u=" +                                                                        ' +
+	'       document.getElementsByTagName("img")[0].src.substring(43,document.getElementsByTagName("img")[0].src.length);                          ' +
+	'	                                                                                                                                           ' +
+	'	w.onreadystatechange = function() {                                                                                                        ' +
+	'		                                                                                                                                       ' +
+	'		if(w.readyState == 4) {                                                                                                                ' +
+	'			var g = w.responseText.replace(/ext/g, "http://audio-surf.com/ext");                                                               ' +
+	'			var h = document.getElementById("shouts_content");                                                                                 ' +
+	'			                                                                                                                                   ' +
+	'			h.innerHTML = g;                                                                                                                   ' +
+	'		}                                                                                                                                      ' +
+	'	};                                                                                                                                         ' +
+	'	                                                                                                                                           ' +
+	'	try {                                                                                                                                      ' +
+	'		w.open("GET", a, true);                                                                                                                ' +
+	'		w.send(null);                                                                                                                          ' +
+	'	}                                                                                                                                          ' +
+	'	catch(d) {}                                                                                                                                ' +
+	'}                                                                                                                                             ' +
 // END LOAD SHOUTS FUNCTION
-		
+
 'function getRequestObject() {                                                                                                                 ' +
 '	var a;                                                                                                                                     ' +
 '	try {                                                                                                                                      ' +
