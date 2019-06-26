@@ -237,7 +237,7 @@ function loadMyPage() {
 // START LOAD SHOUTS FUNCTION
 	'function loadShouts() {                                                                                                                       ' +
 	'	w=getRequestObject();                                                                                                                      ' +
-	'   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?&u=" +                                                                        ' +
+	'   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id=" +                                                                        ' +
 	'       document.getElementsByTagName("img")[0].src.substring(43,document.getElementsByTagName("img")[0].src.length);                          ' +
 	'	                                                                                                                                           ' +
 	'	w.onreadystatechange = function() {                                                                                                        ' +
