@@ -3,9 +3,9 @@
 // BetaMaster64, Yuvira (2019)
 
 // TO DO:
-// Put myscript.js in its own file
-// Add shouts
-// Make the header logged in user not static
+// Fix shouts
+// Improve friend navigation
+// Make the header show the logged in user
 
 
 // Installation is pretty simple. Here's how to do that:
