@@ -234,6 +234,7 @@ function loadMyPage() {
 '	if(a.text=="Leave a shout"||a.innerHTML=="Leave a shout")a.innerHTML=""                                                                    ' +
 '};                                                                                                                                            ' +
 
+// START LOAD SHOUTS FUNCTION		
 'function loadShouts() {                                                                                                                       ' +
 '	w=getRequestObject();                                                                                                                      ' +
 '   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id=" +                                                                        ' +
@@ -255,7 +256,8 @@ function loadMyPage() {
 '	}                                                                                                                                          ' +
 '	catch(d) {}                                                                                                                                ' +
 '}                                                                                                                                             ' +
-
+// END LOAD SHOUTS FUNCTION
+		
 'function getRequestObject() {                                                                                                                 ' +
 '	var a;                                                                                                                                     ' +
 '	try {                                                                                                                                      ' +
