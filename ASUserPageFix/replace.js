@@ -1,5 +1,6 @@
 // AudioSurf user page fix
 // BetaMaster64, Yuvira (2019)
+// OLD VERSION -- reference 'aspagefix.js' instead
 
 // URL offset
 var URL;
@@ -51,7 +52,7 @@ if (window.location.href.includes("/ext/mypage")) {
 	// Inject friend navigation
 	var nav = document.createElement('div');
 	nav.id = 'friends_paging';
-	nav.innerHTML = '<span><a href="javascript:next_friends(\'prev\')"><img src="http://audio-surf.com/images/mypage/arrow_l.png" alt="Previous"></a> <span id="pagenum">'+page+'</span> <a href="javascript:next_friends(\'next\')"><img src="http://audio-surf.com/images/mypage/arrow.png" alt="Next"></a></span>';
+	nav.innerHTML = '<span><a href="javascript:next_friends(\'prev\')"><img id="pageBack" style="visibility:hidden" src="http://audio-surf.com/images/mypage/arrow_l.png" alt="Previous"></a> <span id="pagenum">'+page+'</span> <a href="javascript:next_friends(\'next\')"><img src="http://audio-surf.com/images/mypage/arrow.png" alt="Next"></a></span>';
 	document.getElementById('friends_container').appendChild(nav);
 
 	// Create JavaScript elements
@@ -82,7 +83,7 @@ if (window.location.href.includes("/ext/mypage")) {
 	document.getElementById('main_container').innerHTML = '<center><div id="header" style="width:850px;"><a href="http://audio-surf.com/index.php"><img src="http://audio-surf.com/images/logo_main.png" alt="Audiosurf"></a><div id="personal_bar"><img src="http://audio-surf.com/images/personal_bar_left.png" alt=""><span id="personal_bar_text">[ Welcome back! <a href="#">My Page</a> <a href="http://audio-surf.com/friends.php">Friends</a> <a href="http://audio-surf.com/account.php">Account</a> <a href="http://audio-surf.com/logout.php">Log Out</a> ]</span><span id="personal_bar_spacer"></span></div><ul id="nav_bar"><li><a href="http://store.steampowered.com/app/12910/"><img src="http://audio-surf.com/images/demo_tab.png" alt="Buy"></a></li><li><a href="http://store.steampowered.com/app/12900"><img src="http://audio-surf.com/images/buy_tab.png" alt="Demo"></a></li><li><a href="http://audio-surf.com/"><img src="http://audio-surf.com/images/home_tab.png" alt="Home"></a></li><li><a href="http://audio-surf.com/song.php?t=popular"><img src="http://audio-surf.com/images/songs_tab.png" alt="Songs"></a></li><li><a href="http://audio-surf.com/forum"><img src="http://audio-surf.com/images/forums_tab.png" alt="Forum"></a></li><li><a href="http://audio-surf.com/news.php"><img src="http://audio-surf.com/images/news_tab.png" alt="News"></a></li></ul></div></center>' +
 	document.getElementById('main_container').innerHTML +
 	'<center><div id="footer" style="width:812px"><span id="copyright">© 2010 Audiosurf, LLC | website design by <a href="http://www.funkisockmunki.com/">tabitha</a> </span><span id="footer_nav"><a href="mailto:dylan@audio-surf.com">Contact Us</a></span></div></center>';
-	
+	console.log("user id: "+ userid + " " + URL);
 }
 
 // Modify non-user pages so that user page links work
@@ -97,11 +98,11 @@ else {
 }
 
 function loadMyPage() {
-	myPage = '' + 
-
+	myPage =
+'var maxFP = 0;var initLoad = true;                                                                                                                       ' +	
 'function next_friends(a) {                                                                                                                    ' +
 '	                                                                                                                                           ' +
-'	b=getRequestObject(), c = "http://audio-surf.com/ext/friend_refresh.php?u='+userid+'&p=";                                                  ' +
+'	b=getRequestObject(), c = "'+URL+'/ext/friend_refresh.php?u='+userid+'&p=";                                                  ' +
 '	                                                                                                                                           ' +
 '	switch(a) {                                                                                                                                ' +
 '		case "next": page += 1;                                                                                                                ' +
@@ -116,7 +117,7 @@ function loadMyPage() {
 '	                                                                                                                                           ' +
 '	a=c+page;                                                                                                                                  ' +
 '	b.onreadystatechange = function() {                                                                                                        ' +
-'		                                                                                                                                       ' +
+'                                                                                        												       ' +
 '		if(b.readyState == 4) {                                                                                                                ' +
 '			var f = b.responseText.replace(/ext/g, "http://audio-surf.com/ext");                                                               ' +
 '			var e = document.getElementById("friends");                                                                                        ' +
@@ -127,7 +128,10 @@ function loadMyPage() {
 '			document.getElementById("pagenum").innerHTML=page;                                                                                 ' +
 '		}                                                                                                                                      ' +
 '	};                                                                                                                                         ' +
-'	                                                                                                                                           ' +
+'                                                                                                                                              ' +
+'	if (page==1) document.getElementById("pageBack").style.visibility = "hidden";                                                              ' +
+'   else document.getElementById("pageBack").style.visibility = "visible";                                                                     ' +
+'                                                                                                                                              ' +
 '	try {                                                                                                                                      ' +
 '		b.open("GET", a, true);                                                                                                                ' +
 '		b.send(null);                                                                                                                          ' +
@@ -237,8 +241,7 @@ function loadMyPage() {
 // START LOAD SHOUTS FUNCTION
 	'function loadShouts() {                                                                                                                       ' +
 	'	w=getRequestObject();                                                                                                                      ' +
-	'   a = "http://audio-surf.com/ext/mypage_shouts_refresh.php?a=r&id=" +                                                                        ' +
-	'       document.getElementsByTagName("img")[0].src.substring(43,document.getElementsByTagName("img")[0].src.length);                          ' +
+	'   a = "'+URL+'/ext/mypage_shouts_refresh.php?a=r&id="+'+userid+';                                                                        ' +
 	'	                                                                                                                                           ' +
 	'	w.onreadystatechange = function() {                                                                                                        ' +
 	'		                                                                                                                                       ' +
