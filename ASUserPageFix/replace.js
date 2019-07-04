@@ -1,6 +1,5 @@
 // AudioSurf user page fix
 // BetaMaster64, Yuvira (2019)
-// OLD VERSION -- reference 'aspagefix.js' instead
 
 // URL offset
 var URL;
@@ -18,7 +17,7 @@ else if(window.location.href.includes("audio-surf")) URL = window.location.href.
 else if(window.location.href.includes("audiosurfthegame")) URL = window.location.href.substring(0,27);
 
 // If the URL is not recognized, log error
-else console.log("Didn't detect the URL: '" + window.location.href + "'! E-mail BetaMaster with this error message!");
+else alert("Didn't detect the URL: '" + window.location.href + "'! Screenshot this error and E-mail it to BetaMaster!");
 
 // If it is a user page, redirects to the /ext/* directory
 if (!window.location.href.includes("/ext/") && window.location.href.includes("mypage")) {
@@ -83,7 +82,6 @@ if (window.location.href.includes("/ext/mypage")) {
 	document.getElementById('main_container').innerHTML = '<center><div id="header" style="width:850px;"><a href="http://audio-surf.com/index.php"><img src="http://audio-surf.com/images/logo_main.png" alt="Audiosurf"></a><div id="personal_bar"><img src="http://audio-surf.com/images/personal_bar_left.png" alt=""><span id="personal_bar_text">[ Welcome back! <a href="#">My Page</a> <a href="http://audio-surf.com/friends.php">Friends</a> <a href="http://audio-surf.com/account.php">Account</a> <a href="http://audio-surf.com/logout.php">Log Out</a> ]</span><span id="personal_bar_spacer"></span></div><ul id="nav_bar"><li><a href="http://store.steampowered.com/app/12910/"><img src="http://audio-surf.com/images/demo_tab.png" alt="Buy"></a></li><li><a href="http://store.steampowered.com/app/12900"><img src="http://audio-surf.com/images/buy_tab.png" alt="Demo"></a></li><li><a href="http://audio-surf.com/"><img src="http://audio-surf.com/images/home_tab.png" alt="Home"></a></li><li><a href="http://audio-surf.com/song.php?t=popular"><img src="http://audio-surf.com/images/songs_tab.png" alt="Songs"></a></li><li><a href="http://audio-surf.com/forum"><img src="http://audio-surf.com/images/forums_tab.png" alt="Forum"></a></li><li><a href="http://audio-surf.com/news.php"><img src="http://audio-surf.com/images/news_tab.png" alt="News"></a></li></ul></div></center>' +
 	document.getElementById('main_container').innerHTML +
 	'<center><div id="footer" style="width:812px"><span id="copyright">© 2010 Audiosurf, LLC | website design by <a href="http://www.funkisockmunki.com/">tabitha</a> </span><span id="footer_nav"><a href="mailto:dylan@audio-surf.com">Contact Us</a></span></div></center>';
-	console.log("user id: "+ userid + " " + URL);
 }
 
 // Modify non-user pages so that user page links work
@@ -99,7 +97,6 @@ else {
 
 function loadMyPage() {
 	myPage =
-'var maxFP = 0;var initLoad = true;                                                                                                                       ' +	
 'function next_friends(a) {                                                                                                                    ' +
 '	                                                                                                                                           ' +
 '	b=getRequestObject(), c = "'+URL+'/ext/friend_refresh.php?u='+userid+'&p=";                                                  ' +
