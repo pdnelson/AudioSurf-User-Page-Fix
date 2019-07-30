@@ -235,7 +235,7 @@ function loadMyPage() {
 '	if(a.text=="Leave a shout"||a.innerHTML=="Leave a shout")a.innerHTML=""                                                                    ' +
 '};                                                                                                                                            ' +
 
-// START LOAD SHOUTS FUNCTION
+/* START LOAD SHOUTS FUNCTION
 	'function loadShouts() {                                                                                                                       ' +
 	'	w=getRequestObject();                                                                                                                      ' +
 	'   a = "'+URL+'/ext/mypage_shouts_refresh.php?a=r&id="+'+userid+';                                                                        ' +
@@ -256,7 +256,7 @@ function loadMyPage() {
 	'	}                                                                                                                                          ' +
 	'	catch(d) {}                                                                                                                                ' +
 	'}                                                                                                                                             ' +
-// END LOAD SHOUTS FUNCTION
+// END LOAD SHOUTS FUNCTION*/
 
 'function getRequestObject() {                                                                                                                 ' +
 '	var a;                                                                                                                                     ' +
